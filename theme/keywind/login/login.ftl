@@ -1,4 +1,5 @@
 <#import "template.ftl" as layout>
+<#import "passkeys.ftl" as passkeys>
 <#import "components/atoms/button.ftl" as button>
 <#import "components/atoms/button-group.ftl" as buttonGroup>
 <#import "components/atoms/checkbox.ftl" as checkbox>
@@ -31,7 +32,7 @@
           value="<#if auth.selectedCredential?has_content>${auth.selectedCredential}</#if>"
         >
         <@input.kw
-          autocomplete=realm.loginWithEmailAllowed?string("email", "username")
+          autocomplete=((enableWebAuthnConditionalUI!'')?has_content)?then('username webauthn', realm.loginWithEmailAllowed?string("email", "username"))
           autofocus=true
           disabled=usernameEditDisabled??
           invalid=messagesPerField.existsError("username", "password")
@@ -70,6 +71,7 @@
         </@buttonGroup.kw>
       </@form.kw>
     </#if>
+    <@passkeys.conditionalUIData />
   <#elseif section="info">
     <#if realm.password && realm.registrationAllowed && !registrationDisabled??>
       <div class="text-center">

@@ -9,6 +9,7 @@
 <#import "components/atoms/theme-toggle.ftl" as themeToggle>
 <#import "components/molecules/locale-provider.ftl" as localeProvider>
 <#import "components/molecules/username.ftl" as username>
+<#import "passkeys.ftl" as passkeys>
 
 <#macro
   registrationLayout
@@ -81,7 +82,10 @@
           <#if realm.internationalizationEnabled && locale.supported?size gt 1>
             <@localeProvider.kw currentLocale=locale.current locales=locale.supported />
           </#if>
-          <@themeToggle.kw />
+          <div class="flex items-center gap-4">
+            <@passkeys.button />
+            <@themeToggle.kw />
+          </div>
         </@nav.kw>
       </@container.kw>
     </@body.kw>

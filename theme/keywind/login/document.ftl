@@ -15,6 +15,14 @@
     })();
   </script>
 
+  <script type="importmap">
+    {
+      "imports": {
+        "rfc4648": "${url.resourcesCommonPath}/vendor/rfc4648/rfc4648.js"
+      }
+    }
+  </script>
+
   <#if properties.meta?has_content>
     <#list properties.meta?split(" ") as meta>
       <meta name="${meta?split('==')[0]}" content="${meta?split('==')[1]}">

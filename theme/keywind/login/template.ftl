@@ -4,9 +4,9 @@
 <#import "components/atoms/button.ftl" as button>
 <#import "components/atoms/card.ftl" as card>
 <#import "components/atoms/container.ftl" as container>
-<#import "components/atoms/heading.ftl" as heading>
 <#import "components/atoms/logo.ftl" as logo>
 <#import "components/atoms/nav.ftl" as nav>
+<#import "components/atoms/theme-toggle.ftl" as themeToggle>
 <#import "components/molecules/locale-provider.ftl" as localeProvider>
 <#import "components/molecules/username.ftl" as username>
 
@@ -19,21 +19,25 @@
   showAnotherWayIfPresent=true
 >
   <#assign cardHeader>
-    <@logo.kw>
-      ${kcSanitize(msg("loginTitleHtml", (realm.displayNameHtml!"")))?no_esc}
-    </@logo.kw>
-    <#if !(auth?has_content && auth.showUsername() && !auth.showResetCredentials())>
-      <@heading.kw>
-        <#nested "header">
-      </@heading.kw>
-    <#else>
-      <#nested "show-username">
-      <@username.kw
-        linkHref=url.loginRestartFlowUrl
-        linkTitle=msg("restartLoginTooltip")
-        name=auth.attemptedUsername
-      />
-    </#if>
+    <div class="flex items-center gap-3">
+      <@logo.kw />
+      <div class="h-8 w-px bg-secondary-300 dark:bg-secondary-600"></div>
+      <#if !(auth?has_content && auth.showUsername() && !auth.showResetCredentials())>
+        <h1 class="text-xl">
+          <#nested "header">
+        </h1>
+      <#else>
+        <div class="space-y-1">
+          <h1 class="sr-only">${msg("loginTitle", (realm.displayName!""))}</h1>
+          <#nested "show-username">
+          <@username.kw
+            linkHref=url.loginRestartFlowUrl
+            linkTitle=msg("restartLoginTooltip")
+            name=auth.attemptedUsername
+          />
+        </div>
+      </#if>
+    </div>
   </#assign>
 
   <#assign cardContent>
@@ -44,7 +48,7 @@
     </#if>
     <#nested "form">
     <#if displayRequiredFields>
-      <p class="text-secondary-600 text-sm">
+      <p class="text-secondary-600 dark:text-secondary-300 text-sm">
         * ${msg("requiredFields")}
       </p>
     </#if>
@@ -77,6 +81,7 @@
           <#if realm.internationalizationEnabled && locale.supported?size gt 1>
             <@localeProvider.kw currentLocale=locale.current locales=locale.supported />
           </#if>
+          <@themeToggle.kw />
         </@nav.kw>
       </@container.kw>
     </@body.kw>

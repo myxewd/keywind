@@ -5,17 +5,22 @@
 
 <@layout.registrationLayout; section>
   <#if section="header">
+    <#if client.name?has_content>
+      ${msg("oauthGrantTitle", advancedMsg(client.name))}
+    <#else>
+      ${msg("oauthGrantTitle", client.clientId)}
+    </#if>
+  <#elseif section="form">
     <#if client.attributes.logoUri??>
       <img class="mb-4 mx-auto" src="${client.attributes.logoUri}"/>
     </#if>
-    <p>
+    <p class="mb-4 text-center">
       <#if client.name?has_content>
         ${msg("oauthGrantTitle", advancedMsg(client.name))}
       <#else>
         ${msg("oauthGrantTitle", client.clientId)}
       </#if>
     </p>
-  <#elseif section="form">
     <h3>${msg("oauthGrantRequest")}</h3>
     <ul class="list-disc pl-4">
       <#if oauth.clientScopesRequested??>

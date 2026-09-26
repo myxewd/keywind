@@ -3,7 +3,7 @@
     <input
       <#if checked>checked</#if>
 
-      class="border-secondary-200 focus:ring-primary-600"
+      class="border-secondary-200 focus:ring-primary-600 dark:bg-secondary-800 dark:border-secondary-600"
       id="${id}"
       type="radio"
 
@@ -11,7 +11,7 @@
         ${attrName}="${attrValue}"
       </#list>
     >
-    <label class="ml-2 text-secondary-600 text-sm" for="${id}">
+    <label class="ml-2 text-secondary-600 dark:text-secondary-300 text-sm" for="${id}">
       ${label}
     </label>
   </div>

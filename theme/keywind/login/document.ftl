@@ -5,6 +5,16 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('keywind-theme');
+        var dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (dark) document.documentElement.classList.add('dark');
+      } catch (e) {}
+    })();
+  </script>
+
   <#if properties.meta?has_content>
     <#list properties.meta?split(" ") as meta>
       <meta name="${meta?split('==')[0]}" content="${meta?split('==')[1]}">

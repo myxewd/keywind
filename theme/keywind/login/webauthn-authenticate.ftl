@@ -62,7 +62,7 @@
     Alpine.store('webAuthnAuthenticate', {
       challenge: '${challenge}',
       createTimeout: '${createTimeout}',
-      isUserIdentified: '${isUserIdentified}',
+      isUserIdentified: ${isUserIdentified},
       rpId: '${rpId}',
       unsupportedBrowserText: '${msg("webauthn-unsupported-browser-text")?no_esc}',
       userVerification: '${userVerification}',

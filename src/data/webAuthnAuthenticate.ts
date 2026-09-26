@@ -21,7 +21,7 @@ type StoreType = {
   webAuthnAuthenticate: {
     challenge: string;
     createTimeout: string;
-    isUserIdentified: string;
+    isUserIdentified: boolean;
     rpId: string;
     unsupportedBrowserText: string;
     userVerification: UserVerificationRequirement | 'not specified';

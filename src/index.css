@@ -10,6 +10,15 @@
     @apply hidden !important;
   }
 
+  /* Logo
+    ======================================================================== */
+
+  /* The logo resolves its source from a tiny inline script. Until that runs - i.e. when
+     JavaScript is unavailable - hide it so the <noscript> fallback is the one shown. */
+  #kc-logo:not([src]) {
+    display: none;
+  }
+
   /* Separate
     ======================================================================== */
 

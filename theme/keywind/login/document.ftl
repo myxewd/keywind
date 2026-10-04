@@ -29,9 +29,19 @@
     </#list>
   </#if>
 
+  <#-- favicons entries are "path==rel", optionally followed by "==type" and "==sizes" -->
   <#if properties.favicons?has_content>
     <#list properties.favicons?split(" ") as favicon>
-      <link href="${url.resourcesPath}/${favicon?split('==')[0]}" rel="${favicon?split('==')[1]}">
+      <#if favicon?has_content>
+        <#assign faviconAttrs = favicon?split("==")>
+        <#if faviconAttrs?size == 2>
+          <link href="${url.resourcesPath}/${faviconAttrs[0]}" rel="${faviconAttrs[1]}">
+        <#elseif faviconAttrs?size == 3>
+          <link href="${url.resourcesPath}/${faviconAttrs[0]}" rel="${faviconAttrs[1]}" type="${faviconAttrs[2]}">
+        <#elseif faviconAttrs?size gte 4>
+          <link href="${url.resourcesPath}/${faviconAttrs[0]}" rel="${faviconAttrs[1]}" type="${faviconAttrs[2]}" sizes="${faviconAttrs[3]}">
+        </#if>
+      </#if>
     </#list>
   </#if>
 
